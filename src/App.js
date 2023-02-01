@@ -9,6 +9,17 @@ import { drawRect } from "./utilities";
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [facingMode, setFacingMode] = useState(null);
+
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
+
+  useEffect(() => {
+    setFacingMode(isMobile() ? "user" : "environment");
+  }, []);
 
   // Main function
   const runCoco = async () => {
@@ -45,18 +56,23 @@ function App() {
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx); 
+      drawRect(obj, ctx);
     }
   };
 
-  useEffect(()=>{runCoco()},[]);
+  useEffect(() => {
+    runCoco();
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <Webcam
           ref={webcamRef}
-          muted={true} 
+          muted={true}
+          videoConstraints={{
+            facingMode: facingMode,
+          }}
           style={{
             position: "absolute",
             marginLeft: "auto",
@@ -65,7 +81,7 @@ function App() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 640,
+            width: "100%",
             height: 480,
           }}
         />
@@ -80,11 +96,12 @@ function App() {
             right: 0,
             textAlign: "center",
             zindex: 8,
-            width: 640,
+            width: "100%",
             height: 480,
           }}
         />
       </header>
+      <p>Facing Mode: {facingMode}</p>
     </div>
   );
 }
