@@ -9,7 +9,7 @@ import { drawRect } from "./utilities";
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const [facingMode, setFacingMode] = useState(null);
+  const [facingMode, setFacingMode] = useState("environment");
 
   const isMobile = () => {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -18,7 +18,7 @@ function App() {
   };
 
   useEffect(() => {
-    setFacingMode(isMobile() ? "user" : "environment");
+    //setFacingMode(isMobile() ? "user" : "environment");
   }, []);
 
   // Main function
