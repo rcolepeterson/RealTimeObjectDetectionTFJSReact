@@ -1,4 +1,7 @@
 // Import dependencies
+
+// https://github.com/nicknochnack/RealTimeObjectDetectionTFJSReact/blob/95a731ce5eb9045d35ccc001510eb2c40fe09582/src/App.js#L52
+
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
@@ -11,11 +14,11 @@ function App() {
   const canvasRef = useRef(null);
   const [facingMode, setFacingMode] = useState("environment");
 
-  const isMobile = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-  };
+  // const isMobile = () => {
+  //   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  //     navigator.userAgent
+  //   );
+  // };
 
   useEffect(() => {
     //setFacingMode(isMobile() ? "user" : "environment");
@@ -24,7 +27,7 @@ function App() {
   // Main function
   const runCoco = async () => {
     const net = await cocossd.load();
-    console.log("Handpose model loaded.");
+    console.log("runCoco");
     //  Loop and detect hands
     setInterval(() => {
       detect(net);
