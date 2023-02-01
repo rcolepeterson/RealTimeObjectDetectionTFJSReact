@@ -104,7 +104,7 @@ function App() {
           }}
         />
       </header>
-      <p>Facing Mode: {facingMode}</p>
+      <p>v1 Facing Mode: {facingMode}</p>
     </div>
   );
 }
